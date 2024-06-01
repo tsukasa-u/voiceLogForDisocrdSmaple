@@ -7,6 +7,23 @@
 
  ローカルで立ち上げる場合
 
+ 以下のライブラリをインストール
+
+ ```
+npm install @discordjs/voice
+npm install discord.js
+npm install dotenv
+
+npm install eslint
+ ```
+
+実行
+```
+node index.js
+```
+
+discord関連の設定
+
 1. config.json で設定する場合 
 
     ```
