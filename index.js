@@ -1,5 +1,25 @@
+// author : "Hideyuki Oguri"
+
+// about config.json
+// https://discordjs.guide/creating-your-bot/#using-config-json
+
+// token : "your bot token"
+// channel_id : "channel id you want bot to send message to"
+
+
+
+
 const { Client, Events, GatewayIntentBits, IntentsBitField } = require('discord.js');
+
+// If you use .env File, you sould comment out the following code
 const { token, channel_id } = require('./config.json');
+
+// If you use .env File, you can use the following code
+// const dotenv = require('dotenv');
+// dotenv.config();
+// const token = process.env.DISCORD_TOKEN;
+// const channel_id = process.env.DISCORD_CHANNEL_ID;
+
 
 // create the client with the intents
 const myIntents = new IntentsBitField();
@@ -23,14 +43,15 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
     if (!newChannel) {
         // client.channels.cache.get('channel-id').send(`Message`);
-        client.channels.cache.get(channel_id).send(`User ${oldState.member.user.tag} left a ${oldState.channel.name} voice channel`);
-        console.log(`User ${oldState.member.user.tag} finish a call ${oldState.channel.name}`);
+        const username = oldState.member.displayName ? oldState.member.displayName : (oldState.member.nickname ? oldState.member.nickname : (oldState.member.username ? oldState.member.username : oldState.member.user.tag));
+        client.channels.cache.get(channel_id).send(`User ${username} left a ${oldState.channel.name} voice channel`);
+        
         return;
     }
 
     if (!oldChannel) {
-        client.channels.cache.get(channel_id).send(`User ${newState.member.user.tag} join a ${newState.channel.name} voice channel`);
-        console.log(`User ${newState.member.user.tag} start a call ${ newState.channel.name}`);
+        const username = newState.member.displayName ? newState.member.displayName : (newState.member.nickname ? newState.member.nickname : (newState.member.username ? newState.member.username : newState.member.user.tag));
+        client.channels.cache.get(channel_id).send(`User ${username} join a ${newState.channel.name} voice channel`);
         return;
     }
 
