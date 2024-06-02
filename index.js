@@ -6,9 +6,6 @@
 // token : "your bot token"
 // channel_id : "channel id you want bot to send message to"
 
-
-
-
 const { Client, Events, GatewayIntentBits, IntentsBitField } = require('discord.js');
 
 // If you use .env File, you sould comment out the following code
@@ -51,10 +48,16 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
     if (!oldChannel) {
         const username = newState.member.displayName ? newState.member.displayName : (newState.member.nickname ? newState.member.nickname : (newState.member.username ? newState.member.username : newState.member.user.tag));
-        client.channels.cache.get(channel_id).send(`User ${username} join a ${newState.channel.name} voice channel`);
+        client.channels.cache.get(channel_id).send(`User ${username} joined a ${newState.channel.name} voice channel`);
         return;
     }
 
+    if (oldChannel.id != newChannel.id) {
+        const username = newState.member.displayName ? newState.member.displayName : (newState.member.nickname ? newState.member.nickname : (newState.member.username ? newState.member.username : newState.member.user.tag));
+        client.channels.cache.get(channel_id).send(`User ${username} move to a ${newState.channel.name} voice channel`);
+        return;
+    }
+    return;
 });
 
 //connect the bot to the server
