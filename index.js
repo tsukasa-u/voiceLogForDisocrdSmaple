@@ -35,25 +35,32 @@ client.once('ready', () => {
 
 // the procedure of the bot when a user join or leave a voice channel
 client.on("voiceStateUpdate", async (oldState, newState) => {
+
+    var getUserName = function(member) {
+        if (member.displayName !== null && member.displayName !== undefined) return member.displayName;
+        if (member.nickname !== null && member.nickname !== undefined) return member.nickname;
+        if (member.username !== null && member.username !== undefined) return member.username;
+        return member.user.tag; 
+    }
+
     const newChannel = newState.channel;
     const oldChannel = oldState.channel;
 
     if (!newChannel) {
         // client.channels.cache.get('channel-id').send(`Message`);
-        const username = oldState.member.displayName ? oldState.member.displayName : (oldState.member.nickname ? oldState.member.nickname : (oldState.member.username ? oldState.member.username : oldState.member.user.tag));
+        const username = getUserName(oldState.member);
         client.channels.cache.get(channel_id).send(`User ${username} left a ${oldState.channel.name} voice channel`);
-        
         return;
     }
 
     if (!oldChannel) {
-        const username = newState.member.displayName ? newState.member.displayName : (newState.member.nickname ? newState.member.nickname : (newState.member.username ? newState.member.username : newState.member.user.tag));
+        const username = getUserName(newState.member);
         client.channels.cache.get(channel_id).send(`User ${username} joined a ${newState.channel.name} voice channel`);
         return;
     }
 
     if (oldChannel.id != newChannel.id) {
-        const username = newState.member.displayName ? newState.member.displayName : (newState.member.nickname ? newState.member.nickname : (newState.member.username ? newState.member.username : newState.member.user.tag));
+        const username = getUserName(newState.member);
         client.channels.cache.get(channel_id).send(`User ${username} move to a ${newState.channel.name} voice channel`);
         return;
     }
