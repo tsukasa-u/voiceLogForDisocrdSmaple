@@ -6,7 +6,8 @@
 // token : "your bot token"
 // channel_id : "channel id you want bot to send message to"
 
-const { Client, Events, GatewayIntentBits, IntentsBitField } = require('discord.js');
+const { Client, Events, IntentsBitField } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 // If you use .env File, you sould comment out the following code
 const { token, channel_id } = require('./config.json');
@@ -43,6 +44,11 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         return member.user.tag; 
     }
 
+    var getUserAvatarURL = function(member) {
+        if (member.user.avatarURL() !== null && member.user.avatarURL() !== undefined) return member.user.avatarURL();
+        return member.user.defaultAvatarURL;
+    }
+
     var sendLog = async function(channel_id, message) {
         try {
             await client.channels.cache.get(channel_id).send(message);
@@ -60,7 +66,17 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         if (oldChannel.guildId === guildId) {
             const username = getUserName(oldState.member);
             // sendLog(channel_id, `User ${username} left a ${oldChannel.name} voice channel`);
-            sendLog(channel_id, `User ${username} left a <#${oldChannel.id}> voice channel`);
+            // sendLog(channel_id, `User ${username} left a <#${oldChannel.id}> voice channel`);
+            sendLog(channel_id, { embeds: [new EmbedBuilder()
+                .setColor(0xff0000)
+                .setTitle(`User ${username} left a <#${oldChannel.id}> voice channel`)
+                // .setDescription(`User ${username} left a <#${oldChannel.id}> voice channel`)
+                .setAuthor({ name: username, iconURL: getUserAvatarURL(newState.member) })
+            ]});
+            // sendLog(channel_id, { embeds: [new EmbedBuilder()
+            //     .setColor(0xff0000)
+            //     .setFooter({ text: `User ${username} left a ${oldChannel.name} voice channel`, iconURL: getUserAvatarURL(newState.member) })
+            // ]});
         }
         return;
     }
@@ -69,7 +85,17 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         if (newChannel.guildId === guildId) {
             const username = getUserName(newState.member);
             // sendLog(channel_id, `User ${username} joined a ${newChannel.name} voice channel`);
-            sendLog(channel_id, `User ${username} joined a <#${newChannel.id}> voice channel`);
+            // sendLog(channel_id, `User ${username} joined a <#${newChannel.id}> voice channel`);
+            sendLog(channel_id, { embeds: [new EmbedBuilder()
+                .setColor(0x00ff00)
+                .setTitle(`User ${username} joined a <#${newChannel.id}> voice channel`)
+                // .setDescription(`User ${username} joined a ${newChannel.name} voice channel`)
+                .setAuthor({ name: username, iconURL: getUserAvatarURL(newState.member) })
+            ]});
+            // sendLog(channel_id, { embeds: [new EmbedBuilder()
+            //     .setColor(0x00ff00)
+            //     .setFooter({ text: `User ${username} joined a ${newChannel.name} voice channel`, iconURL: getUserAvatarURL(newState.member) })
+            // ]});
         }
         return;
     }
@@ -78,7 +104,17 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         if (newChannel.guildId === guildId && oldChannel.guildId === guildId) {
             const username = getUserName(newState.member);
             // sendLog(channel_id, `User ${username} move to a ${newChannel.name} voice channel`);
-            sendLog(channel_id, `User ${username} move to a <#${newChannel.id}> voice channel`);
+            // sendLog(channel_id, `User ${username} move to a <#${newChannel.id}> voice channel`);
+            sendLog(channel_id, { embeds: [new EmbedBuilder()
+                .setColor(0x0000ff)
+                .setTitle(`User ${username} move to a <#${newChannel.id}> voice channel`)
+                // .setDescription(`User ${username} move to a <#${newChannel.id}> voice channel`)
+                .setAuthor({ name: username, iconURL: getUserAvatarURL(newState.member) })
+            ]});
+            // sendLog(channel_id, { embeds: [new EmbedBuilder()
+            //     .setColor(0x0000ff)
+            //     .setFooter({ text: `User ${username} move to a ${newChannel.name} voice channel`, iconURL: getUserAvatarURL(newState.member) })
+            // ]});
         }
         return;
     }
@@ -92,3 +128,7 @@ client.on('unhandledRejection', error => {
 
 //connect the bot to the server
 client.login(token);
+
+
+// TODO
+// add code for UND_ERR_CONNECT_TIMEOUT Error
