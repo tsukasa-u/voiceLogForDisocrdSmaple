@@ -45,26 +45,37 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
     const newChannel = newState.channel;
     const oldChannel = oldState.channel;
-
+    const guildId = client.channels.cache.get(channel_id).guildId;
+    
     if (!newChannel) {
-        // client.channels.cache.get('channel-id').send(`Message`);
         const username = getUserName(oldState.member);
-        client.channels.cache.get(channel_id).send(`User ${username} left a ${oldState.channel.name} voice channel`);
+        if (oldChannel.guildId === guildId) {
+            client.channels.cache.get(channel_id).send(`User ${username} left a ${oldState.channel.name} voice channel`);
+        }
         return;
     }
 
     if (!oldChannel) {
         const username = getUserName(newState.member);
-        client.channels.cache.get(channel_id).send(`User ${username} joined a ${newState.channel.name} voice channel`);
+        if (newChannel.guildId === guildId) {
+            client.channels.cache.get(channel_id).send(`User ${username} joined a ${newState.channel.name} voice channel`);
+        }
         return;
     }
 
     if (oldChannel.id != newChannel.id) {
         const username = getUserName(newState.member);
-        client.channels.cache.get(channel_id).send(`User ${username} move to a ${newState.channel.name} voice channel`);
+        if (newChannel.guildId === guildId) {
+            client.channels.cache.get(channel_id).send(`User ${username} move to a ${newState.channel.name} voice channel`);
+        }
         return;
     }
     return;
+});
+
+client.on('unhandledRejection', error => {
+    client.channels.cache.get(channel_id).send(`unhandledRejection occured. Please check the log.`);
+    console.log('error:', error);
 });
 
 //connect the bot to the server
