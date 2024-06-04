@@ -43,30 +43,39 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         return member.user.tag; 
     }
 
+    var sendLog = async function(channel_id, message) {
+        try {
+            await client.channels.cache.get(channel_id).send(message);
+        } catch (error) {
+            console.log('can not send message to the channel');
+            console.log('error:', error);
+        }
+    }
+
     const newChannel = newState.channel;
     const oldChannel = oldState.channel;
     const guildId = client.channels.cache.get(channel_id).guildId;
     
     if (!newChannel) {
-        const username = getUserName(oldState.member);
         if (oldChannel.guildId === guildId) {
-            client.channels.cache.get(channel_id).send(`User ${username} left a ${oldState.channel.name} voice channel`);
+            const username = getUserName(oldState.member);
+            sendLog(channel_id, `User ${username} left a ${oldChannel.name} voice channel`);
         }
         return;
     }
 
     if (!oldChannel) {
-        const username = getUserName(newState.member);
         if (newChannel.guildId === guildId) {
-            client.channels.cache.get(channel_id).send(`User ${username} joined a ${newState.channel.name} voice channel`);
+            const username = getUserName(newState.member);
+            sendLog(channel_id, `User ${username} joined a ${newChannel.name} voice channel`);
         }
         return;
     }
 
     if (oldChannel.id != newChannel.id) {
-        const username = getUserName(newState.member);
-        if (newChannel.guildId === guildId) {
-            client.channels.cache.get(channel_id).send(`User ${username} move to a ${newState.channel.name} voice channel`);
+        if (newChannel.guildId === guildId && oldChannel.guildId === guildId) {
+            const username = getUserName(newState.member);
+            sendLog(channel_id, `User ${username} move to a ${newChannel.name} voice channel`);
         }
         return;
     }
@@ -74,7 +83,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 });
 
 client.on('unhandledRejection', error => {
-    client.channels.cache.get(channel_id).send(`unhandledRejection occured. Please check the log.`);
+    console.log('unhandledRejection occured. Please check the log.');
     console.log('error:', error);
 });
 
