@@ -54,7 +54,12 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
     const newChannel = newState.channel;
     const oldChannel = oldState.channel;
-    const guildId = client.channels.cache.get(channel_id).guildId;
+    const guildId = client.channels.cache.get(channel_id).guildId.catch(error => {
+        console.log('can not get guild id');
+        console.log('error:', error);
+        sendLog(channel_id, `can not get guild id`);
+        return;
+    });
     
     if (!newChannel) {
         if (oldChannel.guildId === guildId) {
