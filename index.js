@@ -45,7 +45,8 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     }
 
     var getUserAvatarURL = function(member) {
-        if (member.user.avatarURL() !== null && member.user.avatarURL() !== undefined) return member.user.avatarURL();
+        const avatarURL = member.user.avatarURL();
+        if (avatarURL !== null && avatarURL !== undefined) return avatarURL;
         return member.user.defaultAvatarURL;
     }
 
