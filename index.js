@@ -59,7 +59,8 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (!newChannel) {
         if (oldChannel.guildId === guildId) {
             const username = getUserName(oldState.member);
-            sendLog(channel_id, `User ${username} left a ${oldChannel.name} voice channel`);
+            // sendLog(channel_id, `User ${username} left a ${oldChannel.name} voice channel`);
+            sendLog(channel_id, `User ${username} left a <#${oldChannel.id}> voice channel`);
         }
         return;
     }
@@ -67,7 +68,8 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (!oldChannel) {
         if (newChannel.guildId === guildId) {
             const username = getUserName(newState.member);
-            sendLog(channel_id, `User ${username} joined a ${newChannel.name} voice channel`);
+            // sendLog(channel_id, `User ${username} joined a ${newChannel.name} voice channel`);
+            sendLog(channel_id, `User ${username} joined a <#${newChannel.id}> voice channel`);
         }
         return;
     }
@@ -75,7 +77,8 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (oldChannel.id != newChannel.id) {
         if (newChannel.guildId === guildId && oldChannel.guildId === guildId) {
             const username = getUserName(newState.member);
-            sendLog(channel_id, `User ${username} move to a ${newChannel.name} voice channel`);
+            // sendLog(channel_id, `User ${username} move to a ${newChannel.name} voice channel`);
+            sendLog(channel_id, `User ${username} move to a <#${newChannel.id}> voice channel`);
         }
         return;
     }
