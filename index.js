@@ -66,18 +66,26 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (!newChannel) {
         if (oldChannel.guildId === guildId) {
             const username = getUserName(oldState.member);
-            sendLog(channel_id, {content : `<@${oldState.member.user.id}> left <#${oldChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
-            // sendLog(channel_id, `User ${username} left a ${oldChannel.name} voice channel`);
-            // sendLog(channel_id, `User ${username} left a <#${oldChannel.id}> voice channel`);
+
+            // sample1
+            // sendLog(channel_id, {content : `<@${oldState.member.user.id}> left <#${oldChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
+            
+            // sample2
+            sendLog(channel_id, `${username} left ${oldChannel.name}`);
+            
+            // sample3
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
             //     .setColor(0xff0000)
-            //     .setTitle(`User ${username} left a <#${oldChannel.id}> voice channel`)
-            //     // .setDescription(`User ${username} left a <#${oldChannel.id}> voice channel`)
-            //     .setAuthor({ name: username, iconURL: getUserAvatarURL(newState.member) })
+            //     .setTitle(`left <#${oldChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`)
+            //     // .setDescription(`${username} left a <#${oldChannel.id}> voice channel`)
+            //     .setAuthor({ name: username, iconURL: getUserAvatarURL(oldState.member) })
             // ]});
+            
+            // sample4
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
             //     .setColor(0xff0000)
-            //     .setFooter({ text: `User ${username} left a ${oldChannel.name} voice channel`, iconURL: getUserAvatarURL(newState.member) })
+            //     // .setFooter({ text: `${username} left ${oldChannel.name}`, iconURL: getUserAvatarURL(oldState.member) })
+            //     .setAuthor({ name: `${username} left ${oldChannel.name}`, iconURL: getUserAvatarURL(oldState.member) })
             // ]});
         }
         return;
@@ -86,18 +94,26 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (!oldChannel) {
         if (newChannel.guildId === guildId) {
             const username = getUserName(newState.member);
-            sendLog(channel_id, {content : `<@${newState.member.user.id}> joined <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
-            // sendLog(channel_id, `User ${username} joined a ${newChannel.name} voice channel`);
-            // sendLog(channel_id, `User ${username} joined a <#${newChannel.id}> voice channel`);
+
+            // sample1
+            // sendLog(channel_id, {content : `<@${newState.member.user.id}> joined <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
+            
+            // sample2
+            sendLog(channel_id, `${username} joined ${newChannel.name}`);
+
+            // sample3
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
             //     .setColor(0x00ff00)
-            //     .setTitle(`User ${username} joined a <#${newChannel.id}> voice channel`)
-            //     // .setDescription(`User ${username} joined a ${newChannel.name} voice channel`)
+            //     .setTitle(`joined <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`)
+            //     // .setDescription(`${username} joined a ${newChannel.name}`)
             //     .setAuthor({ name: username, iconURL: getUserAvatarURL(newState.member) })
             // ]});
+            
+            // sample4
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
             //     .setColor(0x00ff00)
-            //     .setFooter({ text: `User ${username} joined a ${newChannel.name} voice channel`, iconURL: getUserAvatarURL(newState.member) })
+            //     // .setFooter({ text: `${username} joined ${newChannel.name}`, iconURL: getUserAvatarURL(newState.member) })
+            //     .setAuthor({ name: `${username} joined ${newChannel.name}`, iconURL: getUserAvatarURL(newState.member) })
             // ]});
         }
         return;
@@ -106,18 +122,26 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (oldChannel.id != newChannel.id) {
         if (newChannel.guildId === guildId && oldChannel.guildId === guildId) {
             const username = getUserName(newState.member);
-            sendLog(channel_id, {content : `<@${newState.member.user.id}> move to <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
-            // sendLog(channel_id, `User ${username} move to a ${newChannel.name} voice channel`);
-            // sendLog(channel_id, `User ${username} move to a <#${newChannel.id}> voice channel`);
+
+            // sample1
+            // sendLog(channel_id, {content : `<@${newState.member.user.id}> move to <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
+            
+            // sample2
+            sendLog(channel_id, `${username} move to ${newChannel.name}`);
+            
+            // sample3
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
-            //     .setColor(0x0000ff)
-            //     .setTitle(`User ${username} move to a <#${newChannel.id}> voice channel`)
-            //     // .setDescription(`User ${username} move to a <#${newChannel.id}> voice channel`)
+            //     .setColor(0xffff00)
+            //     .setTitle(`move to <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`)
+            //     // .setDescription(`${username} move to a <#${newChannel.id}>`)
             //     .setAuthor({ name: username, iconURL: getUserAvatarURL(newState.member) })
             // ]});
+
+            // sample4
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
-            //     .setColor(0x0000ff)
-            //     .setFooter({ text: `User ${username} move to a ${newChannel.name} voice channel`, iconURL: getUserAvatarURL(newState.member) })
+            //     .setColor(0xffff00)
+            //     // .setFooter({ text: `${username} move to ${newChannel.name}`, iconURL: getUserAvatarURL(newState.member) })
+            //     .setAuthor({ name: `${username} move to ${newChannel.name}`, iconURL: getUserAvatarURL(newState.member) })
             // ]});
         }
         return;
