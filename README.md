@@ -3,9 +3,9 @@
 
 # ボイスチャンネル入退出ログ
 
-### Setup
+## Setup
 
- ローカルで立ち上げる場合
+### ローカルで立ち上げる場合
 
  以下のライブラリをインストール
 
@@ -55,6 +55,14 @@ discord関連の設定
     ```
 
 
-##### クラウドになげる場合
+### クラウドになげる場合
 
 .env　を使うときと似た感じでできると思います
+
+## Formatの選択
+
+### Type1
+
+User及びchannelのMention形式で表示。また、timeStampが有効。UserへのMention通知は実際にはされない。
+
+![type1](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/blob/main/images/type1.png)
