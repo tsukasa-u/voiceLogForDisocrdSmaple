@@ -65,4 +65,4 @@ discord関連の設定
 
 User及びchannelのMention形式で表示。また、timeStampが有効。UserへのMention通知は実際にはされない。
 
-![type1](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/blob/main/images/type1.png)
+![type1](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/main/images/type1.png)
