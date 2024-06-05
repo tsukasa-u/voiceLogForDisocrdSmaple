@@ -61,6 +61,8 @@ discord関連の設定
 
 ## Formatの例
 
+index.jsのコメントアウトを解除して設定してください。defaultはsample2に設定してあります。
+
 ### Sample1
 
 User及びchannelをMention形式で表示かつtimeStampが有効。UserへのMention通知は実際にはされない。また、Mention形式ではUser及びchnnelの名前が変更されたとき自動で表示される名前が更新される。
