@@ -63,7 +63,19 @@ discord関連の設定
 
 ### Sample1
 
-User及びchannelのMention形式で表示かつtimeStampが有効。UserへのMention通知は実際にはされない。また、Mention形式ではUser及びchnnelの名前が変更されたとき自動で表示される名前が更新される。
+User及びchannelをMention形式で表示かつtimeStampが有効。UserへのMention通知は実際にはされない。また、Mention形式ではUser及びchnnelの名前が変更されたとき自動で表示される名前が更新される。
 
-![type1](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/main/images/sample1.png)
+![sample1](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/main/images/sample1.png)
 
+
+### Sample2
+
+User及びchannelをText形式で表示。
+
+![sample2](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/main/images/sample2.png)
+
+### Sample3
+
+embed形式で表示かつtimeStampが有効。
+
+![sample3](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/main/images/sample3.png)
