@@ -19,7 +19,7 @@ npm install eslint
 
 実行
 ```
-node index.js
+node .
 ```
 
 discord関連の設定
@@ -59,10 +59,11 @@ discord関連の設定
 
 .env　を使うときと似た感じでできると思います
 
-## Formatの選択
+## Formatの例
 
-### Type1
+### Sample1
 
-User及びchannelのMention形式で表示。また、timeStampが有効。UserへのMention通知は実際にはされない。
+User及びchannelのMention形式で表示かつtimeStampが有効。UserへのMention通知は実際にはされない。また、Mention形式ではUser及びchnnelの名前が変更されたとき自動で表示される名前が更新される。
 
-![type1](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/main/images/type1.png)
+![type1](https://raw.githubusercontent.com/tsukasa-u/voiceLogForDisocrdSmaple/main/images/sample1.png)
+
