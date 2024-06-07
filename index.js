@@ -68,10 +68,10 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
             const username = getUserName(oldState.member);
 
             // sample1
-            // sendLog(channel_id, {content : `<@${oldState.member.user.id}> left <#${oldChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
+            sendLog(channel_id, {content : `<@${oldState.member.user.id}> left <#${oldChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
             
             // sample2
-            sendLog(channel_id, `${username} left ${oldChannel.name}`);
+            // sendLog(channel_id, `${username} left ${oldChannel.name}`);
             
             // sample3
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
@@ -93,13 +93,13 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
     if (!oldChannel) {
         if (newChannel.guildId === guildId) {
-            const username = getUserName(newState.member);
+            // const username = getUserName(newState.member);
 
             // sample1
-            // sendLog(channel_id, {content : `<@${newState.member.user.id}> joined <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
+            sendLog(channel_id, {content : `<@${newState.member.user.id}> joined <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
             
             // sample2
-            sendLog(channel_id, `${username} joined ${newChannel.name}`);
+            // sendLog(channel_id, `${username} joined ${newChannel.name}`);
 
             // sample3
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
@@ -121,13 +121,13 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
     if (oldChannel.id != newChannel.id) {
         if (newChannel.guildId === guildId && oldChannel.guildId === guildId) {
-            const username = getUserName(newState.member);
+            // const username = getUserName(newState.member);
 
             // sample1
-            // sendLog(channel_id, {content : `<@${newState.member.user.id}> move to <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
+            sendLog(channel_id, {content : `<@${newState.member.user.id}> move to <#${newChannel.id}> at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
             
             // sample2
-            sendLog(channel_id, `${username} move to ${newChannel.name}`);
+            // sendLog(channel_id, `${username} move to ${newChannel.name}`);
             
             // sample3
             // sendLog(channel_id, { embeds: [new EmbedBuilder()
@@ -144,7 +144,23 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
             //     .setAuthor({ name: `${username} move to ${newChannel.name}`, iconURL: getUserAvatarURL(newState.member) })
             // ]});
         }
-        return;
+    } else {
+        if (newChannel.guildId === guildId) {
+            if (newState.selfVideo !== oldState.selfVideo) {
+                // const username = getUserName(newState.member);
+                const action = newState.selfVideo ? 'turned on the video' : 'tuened off the video';
+
+                // sample1
+                sendLog(channel_id, {content : `<@${newState.member.user.id}> ${action} at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
+            }
+            if (newState.streaming !== oldState.streaming) {
+                // const username = getUserName(newState.member);
+                const action = newState.streaming ? 'started streaming' : 'stopped streaming';
+
+                // sample1
+                sendLog(channel_id, {content : `<@${newState.member.user.id}> ${action} at <t:${Math.floor(Date.now()/1000)}:R>`, allowedMentions: { parse: [] }});
+            }
+        }
     }
     return;
 });
